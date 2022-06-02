@@ -8,27 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojis = ["✈️", "🚀", "🚆", "⛵️", "🏎", "🛸", "🚁", "🚤", "🛶", "🛺"]
-    @State private var emojiCount = 6
+    
+    
+    @State var emojis: [String]
+    @State var colorTheam: Color = .red
+    
+    init() {
+        self.emojis = vechiles
+    }
+    
+    var vechiles = ["✈️", "🚀", "🚆", "⛵️", "🏎", "🛸", "🚁", "🚤", "🛶", "🛺"]
+    var animals = ["🐶", "🐸", "🦂", "🦆", "🦊", "🦎", "🐬", "🦄", "🦉"]
+    var flags = ["🏴󠁧󠁢󠁷󠁬󠁳󠁿", "🇦🇿", "🇬🇷", "🇨🇺", "🇰🇵", "🇵🇰", "🇯🇵", "🇯🇲"]
+    
+    
     var body: some View {
         VStack {
-            ScrollView {
+            Text("Memorize!")
+                .font(.largeTitle)
+                .fontWeight(.semibold)
+            ScrollView(showsIndicators: false) {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
+                    ForEach(emojis[0..<emojis.count], id: \.self) { emoji in
                         CardView(content: emoji)
                             .aspectRatio(2/3, contentMode: .fit)
                     }
                 }
             }
-            .foregroundColor(.red)
+            .foregroundColor(colorTheam)
             Spacer()
-            HStack {
-                addCard
-                Spacer()
-                removeCard
-            }
+            cardThemeSelector
             .padding(.horizontal)
-            .font(.largeTitle)
         }
         .padding(.horizontal)
     }
@@ -36,25 +46,47 @@ struct ContentView: View {
 
 extension ContentView {
     
-    private var removeCard: some View {
-        Button {
-            if emojiCount > 1 {
-                emojiCount -= 1
+    private var cardThemeSelector: some View {
+        HStack(spacing: 60) {
+            Button {
+                emojis = vechiles.shuffled()
+                colorTheam = .red
+            } label: {
+                VStack(spacing: 4) {
+                    Image(systemName: "car.fill")
+                        .font(.title)
+                    Text("Vehicles")
+                        .font(.footnote)
+                }
             }
-        } label: {
-            Image(systemName: "minus.circle")
+
+            Button {
+                emojis = animals.shuffled()
+                colorTheam = .orange
+            } label: {
+                VStack {
+                    Image(systemName: "pawprint.fill")
+                        .font(.title)
+                    Text("Animals")
+                        .font(.footnote)
+                }
+            }
+
+            Button {
+                emojis = flags.shuffled()
+                colorTheam = .green
+            } label: {
+                VStack {
+                    Image(systemName: "flag.fill")
+                        .font(.title)
+                    Text("Flags")
+                        .font(.footnote)
+                }
+            }
+
         }
     }
     
-    private var addCard: some View {
-        Button {
-            if emojiCount < emojis.count {
-                emojiCount += 1
-            }
-        } label: {
-            Image(systemName: "plus.circle")
-        }
-    }
     
 }
 
