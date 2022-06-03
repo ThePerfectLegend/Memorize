@@ -9,110 +9,55 @@ import SwiftUI
 
 struct ContentView: View {
     
-    
-    @State var emojis: [String]
-    @State var colorTheam: Color = .red
-    
-    init() {
-        self.emojis = vechiles
-    }
-    
-    var vechiles = ["✈️", "🚀", "🚆", "⛵️", "🏎", "🛸", "🚁", "🚤", "🛶", "🛺"]
-    var animals = ["🐶", "🐸", "🦂", "🦆", "🦊", "🦎", "🐬", "🦄", "🦉"]
-    var flags = ["🏴󠁧󠁢󠁷󠁬󠁳󠁿", "🇦🇿", "🇬🇷", "🇨🇺", "🇰🇵", "🇵🇰", "🇯🇵", "🇯🇲"]
-    
+    @StateObject var viewModel: EmojiMemoryGame
     
     var body: some View {
-        VStack {
-            Text("Memorize!")
-                .font(.largeTitle)
-                .fontWeight(.semibold)
-            ScrollView(showsIndicators: false) {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                    ForEach(emojis[0..<emojis.count], id: \.self) { emoji in
-                        CardView(content: emoji)
-                            .aspectRatio(2/3, contentMode: .fit)
-                    }
+        Text("Memorize!")
+            .font(.largeTitle)
+            .fontWeight(.semibold)
+        ScrollView(showsIndicators: false) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+                ForEach(viewModel.cards) { card in
+                    CardView(card: card)
+                        .aspectRatio(2/3, contentMode: .fit)
+                        .onTapGesture {
+                            viewModel.choose(card)
+                        }
                 }
             }
-            .foregroundColor(colorTheam)
-            Spacer()
-            cardThemeSelector
-            .padding(.horizontal)
         }
+        .foregroundColor(.red)
         .padding(.horizontal)
     }
 }
 
 extension ContentView {
     
-    private var cardThemeSelector: some View {
-        HStack(spacing: 60) {
-            Button {
-                emojis = vechiles.shuffled()
-                colorTheam = .red
-            } label: {
-                VStack(spacing: 4) {
-                    Image(systemName: "car.fill")
-                        .font(.title)
-                    Text("Vehicles")
-                        .font(.footnote)
-                }
-            }
-
-            Button {
-                emojis = animals.shuffled()
-                colorTheam = .orange
-            } label: {
-                VStack {
-                    Image(systemName: "pawprint.fill")
-                        .font(.title)
-                    Text("Animals")
-                        .font(.footnote)
-                }
-            }
-
-            Button {
-                emojis = flags.shuffled()
-                colorTheam = .green
-            } label: {
-                VStack {
-                    Image(systemName: "flag.fill")
-                        .font(.title)
-                    Text("Flags")
-                        .font(.footnote)
-                }
-            }
-
-        }
-    }
     
     
 }
 
 struct CardView: View {
     
-    var content: String
-    @State private var isfaceUp: Bool = true
+    let card: MemoryGame<String>.Card
     
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: 20)
         ZStack {
-            if isfaceUp {
+            if card.isFaceUp {
                 shape
                     .fill()
                     .foregroundColor(.white)
                 shape
                     .strokeBorder(lineWidth: 3)
-                Text(content)
+                Text(card.content)
                     .font(.largeTitle)
+            } else if card.isMathced {
+                shape.opacity(0)
             } else {
                 shape
                     .fill()
             }
-        }
-        .onTapGesture {
-            isfaceUp.toggle()
         }
     }
 }
