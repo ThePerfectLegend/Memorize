@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A8083F0E28508CC50052E04C /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8083F0D28508CC50052E04C /* Cardify.swift */; };
 		A844F6E828490350002B510E /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A844F6E728490350002B510E /* MemoryGame.swift */; };
 		A844F6EA284905FA002B510E /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A844F6E9284905FA002B510E /* EmojiMemoryGame.swift */; };
 		A889AF22284F384B00A4367A /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889AF21284F384B00A4367A /* AspectVGrid.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A8083F0D28508CC50052E04C /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 		A844F6E728490350002B510E /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		A844F6E9284905FA002B510E /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
 		A889AF21284F384B00A4367A /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			children = (
 				A8D349832842103F009AF703 /* EmojiMemoryGameView.swift */,
 				A889AF26284F56B100A4367A /* Components */,
+				A8083F0D28508CC50052E04C /* Cardify.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 			files = (
 				A889AF24284F4EDE00A4367A /* PieView.swift in Sources */,
 				A844F6E828490350002B510E /* MemoryGame.swift in Sources */,
+				A8083F0E28508CC50052E04C /* Cardify.swift in Sources */,
 				A89819E9284DFE730045346B /* Array.swift in Sources */,
 				A889AF22284F384B00A4367A /* AspectVGrid.swift in Sources */,
 				A8D349842842103F009AF703 /* EmojiMemoryGameView.swift in Sources */,

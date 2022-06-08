@@ -38,25 +38,13 @@ struct CardView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                let shape = RoundedRectangle(cornerRadius: Constants.cornerRadius)
-                if card.isFaceUp {
-                    shape
-                        .fill()
-                        .foregroundColor(.white)
-                    shape
-                        .strokeBorder(lineWidth: Constants.lineWidth)
-                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
-                        .opacity(Constants.circleOpaciry)
-                        .padding(Constants.circlePaddind)
-                    Text(card.content)
-                        .font(adoptContnentFont(in: geo.size))
-                } else if card.isMathced {
-                    shape.opacity(0)
-                } else {
-                    shape
-                        .fill()
-                }
+                Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
+                    .opacity(Constants.circleOpaciry)
+                    .padding(Constants.circlePaddind)
+                Text(card.content)
+                    .font(adoptContnentFont(in: geo.size))
             }
+            .cardify(isFaceUp: card.isFaceUp)
         }
     }
     
@@ -65,8 +53,6 @@ struct CardView: View {
     }
     
     private struct Constants {
-        static let cornerRadius: CGFloat = 10
-        static let lineWidth: CGFloat = 3
         static let fontScale: CGFloat = 0.7
         static let circlePaddind: CGFloat = 5
         static let circleOpaciry: Double = 0.5
