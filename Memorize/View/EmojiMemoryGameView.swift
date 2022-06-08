@@ -42,19 +42,24 @@ struct CardView: View {
                     .opacity(Constants.circleOpaciry)
                     .padding(Constants.circlePaddind)
                 Text(card.content)
-                    .font(adoptContnentFont(in: geo.size))
+                    .rotationEffect(Angle(degrees: card.isMathced ? 360 : 0))
+                    .animation(Animation.easeInOut(duration: 2), value: card.isMathced)
+                    .font(Font.system(size: Constants.fontSize))
+                    .scaleEffect(scale(thatFits: geo.size))
             }
             .cardify(isFaceUp: card.isFaceUp)
         }
     }
     
-    private func adoptContnentFont(in size: CGSize) -> Font {
-        Font.system(size: min(size.width, size.height) * Constants.fontScale)
+    private func scale(thatFits size: CGSize) -> CGFloat {
+        min(size.width, size.height) / (Constants.fontSize / Constants.fontScale)
     }
+
     
     private struct Constants {
         static let fontScale: CGFloat = 0.7
         static let circlePaddind: CGFloat = 5
         static let circleOpaciry: Double = 0.5
+        static let fontSize: CGFloat = 32
     }
 }
