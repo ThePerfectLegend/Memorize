@@ -17,6 +17,7 @@
 		A8D349842842103F009AF703 /* EmojiMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D349832842103F009AF703 /* EmojiMemoryGameView.swift */; };
 		A8D3498628421043009AF703 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D3498528421043009AF703 /* Assets.xcassets */; };
 		A8D3498928421043009AF703 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D3498828421043009AF703 /* Preview Assets.xcassets */; };
+		A8F6AF0D2851A50300148E53 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F6AF0C2851A50200148E53 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		A8D349832842103F009AF703 /* EmojiMemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGameView.swift; sourceTree = "<group>"; };
 		A8D3498528421043009AF703 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8D3498828421043009AF703 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A8F6AF0C2851A50200148E53 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A8083F0F2850A3E60052E04C /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				A8083F0D28508CC50052E04C /* Cardify.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
 		A844F6EB284913A1002B510E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -65,7 +75,7 @@
 			children = (
 				A8D349832842103F009AF703 /* EmojiMemoryGameView.swift */,
 				A889AF26284F56B100A4367A /* Components */,
-				A8083F0D28508CC50052E04C /* Cardify.swift */,
+				A8083F0F2850A3E60052E04C /* ViewModifiers */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -75,6 +85,7 @@
 			children = (
 				A889AF23284F4EDE00A4367A /* PieView.swift */,
 				A889AF21284F384B00A4367A /* AspectVGrid.swift */,
+				A8F6AF0C2851A50200148E53 /* CardView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -196,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A889AF24284F4EDE00A4367A /* PieView.swift in Sources */,
+				A8F6AF0D2851A50300148E53 /* CardView.swift in Sources */,
 				A844F6E828490350002B510E /* MemoryGame.swift in Sources */,
 				A8083F0E28508CC50052E04C /* Cardify.swift in Sources */,
 				A89819E9284DFE730045346B /* Array.swift in Sources */,
