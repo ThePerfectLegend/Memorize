@@ -49,7 +49,6 @@ struct Cardify: Animatable, ViewModifier {
 extension View {
     /// Modifies View into Card
     /// - Parameter isFaceUp: Bool
-    ///
     /// - Returns: A view that comforms to Cardify
     func cardify(isFaceUp: Bool) -> some View {
         self.modifier(Cardify(isFaceUp: isFaceUp))

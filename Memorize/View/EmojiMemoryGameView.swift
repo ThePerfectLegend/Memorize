@@ -34,8 +34,8 @@ struct EmojiMemoryGameView: View {
 extension EmojiMemoryGameView {
     
     private var gameBody: some View {
-        AspectVGrid(items: game.cards, aspecrRatio: CardConstants.aspectRatio) { card in
-            if isUndealt(card) || card.isMathced && !card.isFaceUp {
+        AspectVGrid(items: game.cards, aspecrRatio: LocalConstants.aspectRatio) { card in
+            if isUndealt(card) || card.isMatched && !card.isFaceUp {
                 Color.clear
             } else {
                 CardView(card: card)
@@ -50,7 +50,7 @@ extension EmojiMemoryGameView {
                     }
             }
         }
-        .foregroundColor(CardConstants.color)
+        .foregroundColor(LocalConstants.color)
     }
     
     private var deckBody: some View {
@@ -62,14 +62,12 @@ extension EmojiMemoryGameView {
                     .zIndex(zIndex(of: card))
             }
         }
-        .frame(width: CardConstants.undealtWidht, height: CardConstants.undealtHeight)
-        .foregroundColor(CardConstants.color)
+        .frame(width: LocalConstants.undealtWidht, height: LocalConstants.undealtHeight)
+        .foregroundColor(LocalConstants.color)
         .onTapGesture {
-            withAnimation {
-                for card in game.cards {
-                    withAnimation(dealAnimation(for: card)) {
-                        deal(card)
-                    }
+            for card in game.cards {
+                withAnimation(dealAnimation(for: card)) {
+                    deal(card)
                 }
             }
         }
@@ -77,7 +75,7 @@ extension EmojiMemoryGameView {
     
     private var shuffleButton: some View {
         Button {
-            withAnimation(.easeInOut) {
+            withAnimation {
                 game.shuffle()
             }
         } label: {
@@ -85,11 +83,13 @@ extension EmojiMemoryGameView {
         }
     }
     
+    /// Collects all card to the *deckBody* and finishes current game
+    /// - Bug: Wrong animation here. Disappear instead dealing into the *deckBody*
     private var restart: some View {
         Button {
             withAnimation {
-                dealt = []
                 game.restart()
+                dealt = []
             }
         } label: {
             Text("Restart")
@@ -108,16 +108,16 @@ extension EmojiMemoryGameView {
     private func dealAnimation(for card: EmojiMemoryGame.Card) -> Animation {
         var delay = 0.0
         if let index = game.cards.firstIndex(where: { $0.id == card.id }) {
-            delay = Double(index) * (CardConstants.totalDealDuration / Double(game.cards.count))
+            delay = Double(index) * (LocalConstants.totalDealDuration / Double(game.cards.count))
         }
-        return Animation.easeInOut(duration: CardConstants.dealDuration).delay(delay)
+        return Animation.easeInOut(duration: LocalConstants.dealDuration).delay(delay)
     }
     
     private func zIndex(of card: EmojiMemoryGame.Card) -> Double {
         -Double(game.cards.firstIndex(where: { $0.id == card.id }) ?? 0)
     }
     
-    private struct CardConstants {
+    private struct LocalConstants {
         static let color = Color.red
         static let aspectRatio: CGFloat = 2/3
         static let dealDuration: Double = 0.5
