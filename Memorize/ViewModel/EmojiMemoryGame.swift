@@ -10,10 +10,21 @@ import SwiftUI
 class EmojiMemoryGame: ObservableObject {
     
     typealias Card = MemoryGame<String>.Card
-    private static let emojis = ["✈️", "🚀", "🚆", "⛵️", "🏎", "🛸", "🚁", "🚤", "🛶", "🛺"]
+    typealias Theme = MemoryGame<String>.MemoryGameTheme
+    
+    private static var emojis = ["✈️", "🚀", "🚆", "⛵️", "🏎", "🛸", "🚁", "🚤", "🛶", "🛺"]
+    
+    @Published var emojiGameThemes: [Theme] = [
+        Theme(name: "Vehicles", emojis: ["✈️", "🚀", "🚗", "⛵️", "🏎", "🛸", "🚁", "🚤", "🏍", "🛺", "🛴", "🚂", "🚜"], colorTheme: .red),
+        Theme(name: "Animals", emojis: ["🦜", "🐖", "🐄", "🦈", "🦔", "🐔", "🐒", "🐮", "🦑", "🐊", "🐅", "🦍"], colorTheme: .green),
+        Theme(name: "Food", emojis: ["🥩", "🍔", "🥥", "🌮", "🍕", "🍰", "🍩", "🍤", "🧀", "🥑", "🍌"], colorTheme: .pink),
+        Theme(name: "Flags", emojis: ["🏴󠁧󠁢󠁷󠁬󠁳󠁿", "🇦🇿", "🇬🇷", "🇨🇺", "🇰🇵", "🇵🇰", "🇯🇵", "🇯🇲", "🇩🇴", "🇪🇸", "🇪🇺", "🇺🇬", "🇺🇸", "🇮🇲", "🇮🇪"], colorTheme: .blue),
+        Theme(name: "Tech", emojis: ["📱", "💻", "🖥", "🕹", "🎙", "📸", "💾", "📺", "📡", "💿", "📽", "📹", "📻"], colorTheme: .gray),
+        Theme(name: "Simbols", emojis: ["🕉", "☣️", "🆘", "🅿️", "🀄️", "👁‍🗨", "🎦", "♠️", "🚼", "💹", "💮", "💝", "♦️", "🕒"], colorTheme: .purple)
+    ]
     
     private static func createMemoryGame() -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: 7) { pairIndex in
+        MemoryGame<String>(numberOfPairsOfCards: emojis.count) { pairIndex in
             emojis[pairIndex]
         }
     }
@@ -23,6 +34,7 @@ class EmojiMemoryGame: ObservableObject {
     var cards: Array<Card> {
         model.cards
     }
+    
     
     // MARK: - Intents(s)
     
@@ -40,8 +52,3 @@ class EmojiMemoryGame: ObservableObject {
 }
 
 
-
-
-//var vechiles = ["✈️", "🚀", "🚆", "⛵️", "🏎", "🛸", "🚁", "🚤", "🛶", "🛺"]
-//var animals = ["🐶", "🐸", "🦂", "🦆", "🦊", "🦎", "🐬", "🦄", "🦉"]
-//var flags = ["🏴󠁧󠁢󠁷󠁬󠁳󠁿", "🇦🇿", "🇬🇷", "🇨🇺", "🇰🇵", "🇵🇰", "🇯🇵", "🇯🇲"]

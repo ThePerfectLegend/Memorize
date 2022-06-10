@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A803C96B285332BF00AAD2C9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A803C96A285332BF00AAD2C9 /* HomeView.swift */; };
+		A803C96D28533A1800AAD2C9 /* GameThemeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A803C96C28533A1800AAD2C9 /* GameThemeRowView.swift */; };
 		A8083F0E28508CC50052E04C /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8083F0D28508CC50052E04C /* Cardify.swift */; };
 		A844F6E828490350002B510E /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A844F6E728490350002B510E /* MemoryGame.swift */; };
 		A844F6EA284905FA002B510E /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A844F6E9284905FA002B510E /* EmojiMemoryGame.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A803C96A285332BF00AAD2C9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A803C96C28533A1800AAD2C9 /* GameThemeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameThemeRowView.swift; sourceTree = "<group>"; };
 		A8083F0D28508CC50052E04C /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 		A844F6E728490350002B510E /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		A844F6E9284905FA002B510E /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 		A889AF25284F568700A4367A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A803C96A285332BF00AAD2C9 /* HomeView.swift */,
 				A8D349832842103F009AF703 /* EmojiMemoryGameView.swift */,
 				A889AF26284F56B100A4367A /* Components */,
 				A8083F0F2850A3E60052E04C /* ViewModifiers */,
@@ -86,6 +91,7 @@
 				A889AF23284F4EDE00A4367A /* PieView.swift */,
 				A889AF21284F384B00A4367A /* AspectVGrid.swift */,
 				A8F6AF0C2851A50200148E53 /* CardView.swift */,
+				A803C96C28533A1800AAD2C9 /* GameThemeRowView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -213,6 +219,8 @@
 				A89819E9284DFE730045346B /* Array.swift in Sources */,
 				A889AF22284F384B00A4367A /* AspectVGrid.swift in Sources */,
 				A8D349842842103F009AF703 /* EmojiMemoryGameView.swift in Sources */,
+				A803C96B285332BF00AAD2C9 /* HomeView.swift in Sources */,
+				A803C96D28533A1800AAD2C9 /* GameThemeRowView.swift in Sources */,
 				A8D349822842103F009AF703 /* MemorizeApp.swift in Sources */,
 				A844F6EA284905FA002B510E /* EmojiMemoryGame.swift in Sources */,
 			);

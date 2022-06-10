@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-    
-    @StateObject var game: EmojiMemoryGame
+        
+    @EnvironmentObject var game: EmojiMemoryGame
     @State private var dealt = Set<String>()
     @Namespace private var dealingNamespace
     
