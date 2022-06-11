@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameThemeRowView: View {
-    
+        
     let theme: MemoryGame<String>.MemoryGameTheme
     
     var body: some View {
@@ -16,10 +16,11 @@ struct GameThemeRowView: View {
             HStack {
                 Text(theme.emojis.randomElement() ?? "")
                     .font(.title3)
-                VStack {
+                VStack(alignment: .leading) {
                     HStack {
                         Text(theme.name)
                             .font(.subheadline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         Spacer()
                         Circle()
                             .fill(theme.colorTheme)

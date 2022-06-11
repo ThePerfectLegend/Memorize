@@ -8,10 +8,18 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-        
+    
     @EnvironmentObject var game: EmojiMemoryGame
     @State private var dealt = Set<String>()
     @Namespace private var dealingNamespace
+    
+    var unwrappedCards: [EmojiMemoryGame.Card] {
+        if let cards = game.cards {
+            return cards
+        } else {
+            return []
+        }
+    }
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -27,6 +35,7 @@ struct EmojiMemoryGameView: View {
             deckBody
         }
         .padding()
+        .navigationBarTitle(game.chosenTheme?.name ?? "", displayMode: .inline)
     }
 }
 
@@ -34,7 +43,7 @@ struct EmojiMemoryGameView: View {
 extension EmojiMemoryGameView {
     
     private var gameBody: some View {
-        AspectVGrid(items: game.cards, aspecrRatio: LocalConstants.aspectRatio) { card in
+        AspectVGrid(items: unwrappedCards, aspecrRatio: LocalConstants.aspectRatio) { card in
             if isUndealt(card) || card.isMatched && !card.isFaceUp {
                 Color.clear
             } else {
@@ -50,12 +59,12 @@ extension EmojiMemoryGameView {
                     }
             }
         }
-        .foregroundColor(LocalConstants.color)
+        .foregroundColor(game.chosenTheme?.colorTheme ?? LocalConstants.color)
     }
     
     private var deckBody: some View {
         ZStack {
-            ForEach(game.cards.filter(isUndealt)) { card in
+            ForEach(unwrappedCards.filter(isUndealt)) { card in
                 CardView(card: card)
                     .matchedGeometryEffect(id: card.id, in: dealingNamespace)
                     .transition(AnyTransition.asymmetric(insertion: .opacity, removal: .identity))
@@ -63,9 +72,9 @@ extension EmojiMemoryGameView {
             }
         }
         .frame(width: LocalConstants.undealtWidht, height: LocalConstants.undealtHeight)
-        .foregroundColor(LocalConstants.color)
+        .foregroundColor(game.chosenTheme?.colorTheme ?? LocalConstants.color)
         .onTapGesture {
-            for card in game.cards {
+            for card in unwrappedCards {
                 withAnimation(dealAnimation(for: card)) {
                     deal(card)
                 }
@@ -94,7 +103,7 @@ extension EmojiMemoryGameView {
         } label: {
             Text("Restart")
         }
-
+        
     }
     
     private func deal(_ card: EmojiMemoryGame.Card) {
@@ -107,14 +116,14 @@ extension EmojiMemoryGameView {
     
     private func dealAnimation(for card: EmojiMemoryGame.Card) -> Animation {
         var delay = 0.0
-        if let index = game.cards.firstIndex(where: { $0.id == card.id }) {
-            delay = Double(index) * (LocalConstants.totalDealDuration / Double(game.cards.count))
+        if let index = unwrappedCards.firstIndex(where: { $0.id == card.id }) {
+            delay = Double(index) * (LocalConstants.totalDealDuration / Double(unwrappedCards.count))
         }
         return Animation.easeInOut(duration: LocalConstants.dealDuration).delay(delay)
     }
     
     private func zIndex(of card: EmojiMemoryGame.Card) -> Double {
-        -Double(game.cards.firstIndex(where: { $0.id == card.id }) ?? 0)
+        -Double(unwrappedCards.firstIndex(where: { $0.id == card.id }) ?? 0)
     }
     
     private struct LocalConstants {
