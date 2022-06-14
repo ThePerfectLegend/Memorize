@@ -10,6 +10,7 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     
     @EnvironmentObject var game: EmojiMemoryGame
+    @EnvironmentObject var theme: ThemeMemoryGame
     @State private var dealt = Set<String>()
     @Namespace private var dealingNamespace
     
@@ -35,7 +36,7 @@ struct EmojiMemoryGameView: View {
             deckBody
         }
         .padding()
-        .navigationBarTitle(game.chosenTheme?.name ?? "", displayMode: .inline)
+        .navigationBarTitle(theme.chosenTheme?.name ?? "", displayMode: .inline)
     }
 }
 
@@ -59,7 +60,7 @@ extension EmojiMemoryGameView {
                     }
             }
         }
-        .foregroundColor(game.chosenTheme?.colorTheme ?? LocalConstants.color)
+        .foregroundColor(theme.chosenTheme?.colorTheme ?? LocalConstants.color)
     }
     
     private var deckBody: some View {
@@ -72,7 +73,7 @@ extension EmojiMemoryGameView {
             }
         }
         .frame(width: LocalConstants.undealtWidht, height: LocalConstants.undealtHeight)
-        .foregroundColor(game.chosenTheme?.colorTheme ?? LocalConstants.color)
+        .foregroundColor(theme.chosenTheme?.colorTheme ?? LocalConstants.color)
         .onTapGesture {
             for card in unwrappedCards {
                 withAnimation(dealAnimation(for: card)) {

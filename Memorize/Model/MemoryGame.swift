@@ -9,17 +9,7 @@ import Foundation
 import SwiftUI
 
 struct MemoryGame<CardContent: Equatable> {
-    
-    struct MemoryGameTheme: Identifiable {
-        let id = UUID().uuidString
-        let name: String
-        let emojis: Set<String>
-        let colorTheme: Color
-        var numberOfPairs: Int {
-            emojis.count
-        }
-    }
-    
+        
     struct Card: Identifiable {
         let id = UUID().uuidString
         var isFaceUp = false {

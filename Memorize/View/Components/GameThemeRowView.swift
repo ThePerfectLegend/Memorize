@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameThemeRowView: View {
         
-    let theme: MemoryGame<String>.MemoryGameTheme
+    let theme: Theme
     
     var body: some View {
         VStack {
