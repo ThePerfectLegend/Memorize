@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @EnvironmentObject var game: EmojiMemoryGame // ?  пока не ясно нежна ли эта модель во вью
+    @StateObject var game: EmojiMemoryGame
     @EnvironmentObject var theme: ThemeMemoryGame
     
     var body: some View {
@@ -20,8 +20,6 @@ struct HomeView: View {
                         EmojiMemoryGameView()
                             .onAppear {
                                 theme.chosenTheme = gameTheme
-                                /// - Warning: This is not the best decicion, creating a model should be under the hood
-//                                game.model = EmojiMemoryGame.createMemoryGame(for: theme)
                             }
                     } label: {
                         GameThemeRowView(theme: gameTheme)
@@ -33,6 +31,7 @@ struct HomeView: View {
             .listStyle(.automatic)
             .navigationTitle("Memorize 🧠")
         }
+        .environmentObject(game)
     }
 }
 

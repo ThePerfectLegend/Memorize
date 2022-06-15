@@ -6,30 +6,42 @@
 //
 
 import SwiftUI
+import Combine
 
 class EmojiMemoryGame: ObservableObject {
     
     typealias Card = MemoryGame<String>.Card
     
-    // Модель должна подхватывать изменения в выбранной теме и создавать игру с выбранной темой
     @Published private(set) var model: MemoryGame<String>?
-
     
+    private let gameTheme: ThemeMemoryGame
+    
+    init(gameTheme: ThemeMemoryGame) {
+        self.gameTheme = gameTheme
+        addSubscribers()
+    }
+    
+    private func addSubscribers() {
+        gameTheme.$chosenTheme
+            .map(createMemoryGame)
+            .assign(to: &$model)
+    }
+        
     private func createMemoryGame(for theme: Theme?) -> MemoryGame<String>? {
         if let theme = theme {
-          return MemoryGame<String>(numberOfPairsOfCards: theme.emojis.count) { pairIndex in
+            print("Game created")
+            return MemoryGame<String>(numberOfPairsOfCards: theme.emojis.count) { pairIndex in
                 theme.emojis.map{$0}[pairIndex]
             }
         } else {
+            print("Game don't setted")
             return nil
         }
     }
-    
-    
+
     var cards: Array<Card>? {
         model?.cards
     }
-    
     
     // MARK: - Intents(s)
     
@@ -42,12 +54,6 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     func restart() {
-//        if model != nil {
-//            self.model = EmojiMemoryGame.createMemoryGame(for: chosenTheme)
-//        } else {
-//            return
-//        }
+        self.model = createMemoryGame(for: gameTheme.chosenTheme)
     }
 }
-
-

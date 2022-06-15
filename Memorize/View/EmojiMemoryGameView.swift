@@ -37,6 +37,9 @@ struct EmojiMemoryGameView: View {
         }
         .padding()
         .navigationBarTitle(theme.chosenTheme?.name ?? "", displayMode: .inline)
+        .onDisappear {
+            theme.chosenTheme = nil
+        }
     }
 }
 
