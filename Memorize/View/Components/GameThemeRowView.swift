@@ -15,20 +15,16 @@ struct GameThemeRowView: View {
         VStack {
             HStack {
                 Text(theme.emojis.randomElement() ?? "")
-                    .font(.title3)
+                    .font(Font.system(size: LocalConstants.emojiFontSize))
                 VStack(alignment: .leading) {
                     HStack {
                         Text(theme.name)
-                            .font(.subheadline)
+                            .font(.headline)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         Spacer()
                         Circle()
                             .fill(theme.colorTheme)
-                    }
-                    HStack {
-                        ForEach(theme.emojis.map{$0}, id: \.self) { emoji in
-                            Text(emoji)
-                        }
+                            .frame(width: LocalConstants.colorSize, height: LocalConstants.colorSize)
                     }
                 }
             }
@@ -36,3 +32,9 @@ struct GameThemeRowView: View {
     }
 }
 
+extension GameThemeRowView {
+    private struct LocalConstants {
+        static let emojiFontSize: CGFloat = 28
+        static let colorSize: CGFloat = 24
+    }
+}

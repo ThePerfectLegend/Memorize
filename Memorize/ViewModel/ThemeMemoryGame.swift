@@ -19,4 +19,12 @@ class ThemeMemoryGame: ObservableObject {
         Theme(name: "Tech", emojis: ["📱", "💻", "🖥", "🕹", "🎙", "📸", "💾", "📺", "📡", "💿", "📽", "📹", "📻"], colorTheme: .gray),
         Theme(name: "Simbols", emojis: ["🕉", "☣️", "🆘", "🅿️", "🀄️", "👁‍🗨", "🎦", "♠️", "🚼", "💹", "💮", "💝", "♦️", "🕒"], colorTheme: .purple)
     ]
+    
+    func deleteTheme(indexSet: IndexSet) {
+        self.emojiGameThemes.remove(atOffsets: indexSet)
+    }
+    
+    func moveTheme(indices: IndexSet, newOffset: Int) {
+        self.emojiGameThemes.move(fromOffsets: indices, toOffset: newOffset)
+    }
 }
