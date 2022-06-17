@@ -11,7 +11,6 @@ import SwiftUI
 struct MemorizeApp: App {
     
     @StateObject private var theme = ThemeMemoryGame()
-   
     
     var body: some Scene {
         WindowGroup {
@@ -20,3 +19,12 @@ struct MemorizeApp: App {
         }
     }
 }
+
+
+/** - Note:
+- Wrong animation when cards go to desc
+- Add rotating animation while cards going
+- Glinch when truing to move rows on main screen
+- Need to create sepate Buttons for Edit and Del Row with custom ButtonRole https://developer.apple.com/documentation/swiftui/buttonrole
+
+ */

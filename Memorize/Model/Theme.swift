@@ -10,9 +10,9 @@ import SwiftUI
 
 struct Theme: Identifiable {
     let id = UUID().uuidString
-    let name: String
-    let emojis: Set<String>
-    let colorTheme: Color
+    var name: String
+    var emojis: Set<String>
+    var colorTheme: Color
     var numberOfPairs: Int {
         emojis.count
     }

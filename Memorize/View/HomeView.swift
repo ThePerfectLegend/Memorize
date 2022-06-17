@@ -11,6 +11,7 @@ struct HomeView: View {
     
     @StateObject var game: EmojiMemoryGame
     @EnvironmentObject var theme: ThemeMemoryGame
+    @State var editingTheme: Theme?
     
     var body: some View {
         NavigationView {
@@ -24,17 +25,32 @@ struct HomeView: View {
                     } label: {
                         GameThemeRowView(theme: gameTheme)
                     }
+                    .swipeActions(edge: .trailing) {
+                        Button(role: .destructive) {
+                            theme.delete(theme: gameTheme)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        Button {
+                            setEditingTheme(gameTheme)
+                        } label: {
+                            Label("Edit", systemImage: "pencil.circle")
+                        }
+                    }
                 }
-                .onDelete(perform: theme.deleteTheme)
                 /// - Bug: Leaving edit mode after finish of moving gesture
                 .onMove(perform: theme.moveTheme)
-                //.edit
-//            https://stackoverflow.com/questions/57496453/swiftui-how-do-i-make-edit-rows-in-a-list
-//            https://developer.apple.com/forums/thread/699277
-//            https://stackoverflow.com/questions/57112426/swiftui-custom-swipe-actions-in-list
-//            https://stackoverflow.com/questions/70869333/swiftui-edit-list-row-relement-with-swipe-action-and-present-modal-sheet
-//            https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-custom-swipe-action-buttons-to-a-list-row
-//            https://developer.apple.com/documentation/swiftui/capsule/swipeactions(edge:allowsfullswipe:content:)/
+                /// - Bug: Fatal error: Unexpectedly found nil while unwrapping an Optional value
+                .sheet(item: $editingTheme, onDismiss: resetEditingTheme) { _ in
+//                    EditSheet(forTheme: Binding($editingTheme)!)
+                    Text(editingTheme?.name ?? "nil")
+                    Button {
+                        print(editingTheme?.name)
+                    } label: {
+                        Text("Print Status")
+                    }
+
+                }
             }
             .navigationTitle("Memorize")
             .toolbar {
@@ -42,9 +58,11 @@ struct HomeView: View {
                     EditButton()
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    addTheme
+                    addThemeButton
                 }
             }
+
+            // adding sheed shoud be here
         }
         .environmentObject(game)
     }
@@ -52,12 +70,20 @@ struct HomeView: View {
 
 extension HomeView {
     
-    var addTheme: some View {
+    var addThemeButton: some View {
         Button {
             print("Sheet should be pop-up here")
         } label: {
             Image(systemName: "plus")
         }
-
+    }
+    
+    func resetEditingTheme() {
+        editingTheme = nil
+    }
+    
+    func setEditingTheme(_ theme: Theme) {
+        editingTheme = theme
+        print("Editing theme set to \(editingTheme?.name ?? "nil")")
     }
 }
