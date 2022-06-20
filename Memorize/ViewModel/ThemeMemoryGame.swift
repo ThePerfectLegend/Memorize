@@ -21,7 +21,6 @@ class ThemeMemoryGame: ObservableObject {
     ]
     
     func delete(theme: Theme) {
-//        self.emojiGameThemes.remove(atOffsets: indexSet)
         if let deleteThemeIndex = self.emojiGameThemes.firstIndex(where: { $0.id == theme.id }) {
             self.emojiGameThemes.remove(at: deleteThemeIndex)
         }
@@ -29,5 +28,10 @@ class ThemeMemoryGame: ObservableObject {
     
     func moveTheme(indices: IndexSet, newOffset: Int) {
         self.emojiGameThemes.move(fromOffsets: indices, toOffset: newOffset)
+    }
+    
+    func defaultDelete(indexSet: IndexSet) {
+        self.emojiGameThemes.remove(atOffsets: indexSet)
+
     }
 }

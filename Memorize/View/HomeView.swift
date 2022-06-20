@@ -25,65 +25,17 @@ struct HomeView: View {
                     } label: {
                         GameThemeRowView(theme: gameTheme)
                     }
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .destructive) {
-                            theme.delete(theme: gameTheme)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                        }
-                        Button {
-                            setEditingTheme(gameTheme)
-                        } label: {
-                            Label("Edit", systemImage: "pencil.circle")
-                        }
-                    }
                 }
-                /// - Bug: Leaving edit mode after finish of moving gesture
                 .onMove(perform: theme.moveTheme)
-                /// - Bug: Fatal error: Unexpectedly found nil while unwrapping an Optional value
-                .sheet(item: $editingTheme, onDismiss: resetEditingTheme) { _ in
-//                    EditSheet(forTheme: Binding($editingTheme)!)
-                    Text(editingTheme?.name ?? "nil")
-                    Button {
-                        print(editingTheme?.name)
-                    } label: {
-                        Text("Print Status")
-                    }
-
-                }
+                .onDelete(perform: theme.defaultDelete)
             }
             .navigationTitle("Memorize")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     EditButton()
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    addThemeButton
-                }
             }
-
-            // adding sheed shoud be here
         }
         .environmentObject(game)
-    }
-}
-
-extension HomeView {
-    
-    var addThemeButton: some View {
-        Button {
-            print("Sheet should be pop-up here")
-        } label: {
-            Image(systemName: "plus")
-        }
-    }
-    
-    func resetEditingTheme() {
-        editingTheme = nil
-    }
-    
-    func setEditingTheme(_ theme: Theme) {
-        editingTheme = theme
-        print("Editing theme set to \(editingTheme?.name ?? "nil")")
     }
 }

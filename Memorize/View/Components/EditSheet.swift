@@ -13,6 +13,12 @@ struct EditSheet: View {
     
     var body: some View {
         Text(forTheme.name)
+        Button {
+            print(forTheme.name)
+        } label: {
+            Text("Show theme")
+        }
+
     }
 }
 
